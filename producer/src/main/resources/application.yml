@@ -1,0 +1,12 @@
+spring:
+  application.name: producer
+  output.ansi.enabled: ALWAYS
+  rabbitmq:
+    host: rabbitmq-service
+    port: 5672
+    connection-timeout: 2000
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: always

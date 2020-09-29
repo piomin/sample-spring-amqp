@@ -1,0 +1,15 @@
+spring:
+  application.name: listener
+  output.ansi.enabled: ALWAYS
+  rabbitmq:
+    host: rabbitmq-service
+    port: 5672
+    connection-timeout: 2000
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+topic.queue.name: t-${random.uuid}
+direct.queue.name: d-${random.uuid}

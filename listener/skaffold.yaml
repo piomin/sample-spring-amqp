@@ -1,0 +1,10 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: listener
+build:
+  artifacts:
+    - image: piomin/listener
+      jib: {}
+  tagPolicy:
+    gitCommit: {}

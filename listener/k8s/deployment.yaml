@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: listener
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: listener
+  template:
+    metadata:
+      labels:
+        app: listener
+    spec:
+      containers:
+      - name: listener
+        image: piomin/listener
+        ports:
+        - containerPort: 8080
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: listener-service
+  labels:
+    app: listener
+spec:
+  type: ClusterIP
+  selector:
+    app: listener
+  ports:
+  - port: 8080
+    name: http
