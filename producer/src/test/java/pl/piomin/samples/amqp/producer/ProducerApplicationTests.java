@@ -1,8 +1,10 @@
 package pl.piomin.samples.amqp.producer;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.RabbitMQContainer;
@@ -12,6 +14,11 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest
 @Testcontainers
 public class ProducerApplicationTests {
+
+    @Bean
+    public Queue queue() {
+        return new Queue("trx-events-topic");
+    }
 
     @Autowired
     ProducerService service;
