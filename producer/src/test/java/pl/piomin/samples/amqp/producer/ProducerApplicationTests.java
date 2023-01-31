@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -15,10 +16,14 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public class ProducerApplicationTests {
 
-    @Bean
-    public Queue queue() {
-        return new Queue("trx-events-topic");
+    @TestConfiguration
+    public static class RabbitConfiguration {
+        @Bean
+        public Queue queue() {
+            return new Queue("trx-events-topic");
+        }
     }
+
 
     @Autowired
     ProducerService service;
