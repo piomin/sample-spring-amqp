@@ -11,6 +11,10 @@
 
 	<artifactId>listener</artifactId>
 
+	<properties>
+		<sonar.moduleKey>${artifactId}</sonar.moduleKey>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
