@@ -1,7 +1,10 @@
 package pl.piomin.samples.amqp.producer;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -20,7 +23,17 @@ public class ProducerApplicationTests {
     public static class RabbitConfiguration {
         @Bean
         public Queue queue() {
-            return new Queue("trx-events-topic");
+            return new Queue("trx-events-queue");
+        }
+
+        @Bean
+        TopicExchange exchange() {
+            return new TopicExchange("trx-events-topic");
+        }
+
+        @Bean
+        Binding binding(Queue queue, TopicExchange exchange) {
+            return BindingBuilder.bind(queue).to(exchange).with("trx-events-topic");
         }
     }
 
