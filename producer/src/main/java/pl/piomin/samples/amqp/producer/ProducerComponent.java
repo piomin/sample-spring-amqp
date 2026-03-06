@@ -1,11 +1,9 @@
 package pl.piomin.samples.amqp.producer;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
 public class ProducerComponent {
 
 	private final ProducerService service;

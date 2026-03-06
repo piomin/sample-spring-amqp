@@ -1,7 +1,7 @@
 package pl.piomin.services.amqp.listener;
 
-import lombok.extern.slf4j.Slf4j;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -10,8 +10,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
 public class ListenerComponent {
+
+	private static final Logger LOG = LoggerFactory.getLogger(ListenerComponent.class);
 
 	@RabbitListener(bindings = {
 		@QueueBinding(
@@ -20,7 +21,7 @@ public class ListenerComponent {
 		)
 	})
 	public void onTopicMessage(SampleMessage message) {
-		log.info("Message received: {}", message);
+		LOG.info("Message received: {}", message);
 	}
 
 	@RabbitListener(bindings = {
@@ -30,7 +31,7 @@ public class ListenerComponent {
 		)
 	})
 	public void onDirectMessage(SampleMessage message) {
-		log.info("Message received: {}", message);
+		LOG.info("Message received: {}", message);
 	}
 
 }
