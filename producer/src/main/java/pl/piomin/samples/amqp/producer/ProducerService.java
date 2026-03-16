@@ -1,14 +1,16 @@
 package pl.piomin.samples.amqp.producer;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-@Slf4j
 public class ProducerService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProducerService.class);
 
     AtomicInteger counter = new AtomicInteger();
 
@@ -21,6 +23,6 @@ public class ProducerService {
     public void send(String destination) {
         SampleMessage msg = new SampleMessage(counter.incrementAndGet(), "abc", "topic");
         rabbitTemplate.convertAndSend(destination, null, msg);
-        log.info("Sending message: {}", msg);
+        LOG.info("Sending message: {}", msg);
     }
 }
